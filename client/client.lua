@@ -9,9 +9,11 @@ Citizen.CreateThread(function()
     if GetResourceState('qb-core') == 'started' then
         QBCore = exports['qb-core']:GetCoreObject()
         print('[DISNAKER] QBCore framework terdeteksi')
+        InitializeQBTarget()
     elseif GetResourceState('es_extended') == 'started' then
         ESX = exports['es_extended']:getSharedObject()
         print('[DISNAKER] ESX framework terdeteksi')
+        InitializeESXTarget()
     else
         print('[DISNAKER] PERINGATAN: Tidak ada framework yang terdeteksi, menggunakan mode standalone')
     end
@@ -31,6 +33,12 @@ AddEventHandler('disnaker:updatePrices', function(items)
     if isMenuOpen then
         RefreshPriceMenu()
     end
+end)
+
+-- Event untuk membuka menu harga (digunakan oleh qb-target)
+RegisterNetEvent('disnaker:openMenu')
+AddEventHandler('disnaker:openMenu', function()
+    OpenPriceMenu()
 end)
 
 -- Fungsi untuk mendapatkan harga saat ini untuk item tertentu
@@ -107,7 +115,91 @@ RegisterCommand('hargabarang', function()
 end, false)
 
 -- Keybind untuk membuka menu harga (default: F9)
-RegisterKeyMapping('hargabarang', 'Buka menu harga barang', 'keyboard', 'F9')
+-- Dinonaktifkan agar tidak terbuka otomatis dengan keybind
+-- RegisterKeyMapping('hargabarang', 'Buka menu harga barang', 'keyboard', 'F9')
+
+-- Fungsi untuk inisialisasi target QBCore
+function InitializeQBTarget()
+    if not QBCore then return end
+    
+    -- Periksa apakah qb-target tersedia
+    if GetResourceState('qb-target') ~= 'started' then
+        print('[DISNAKER] PERINGATAN: qb-target tidak terdeteksi, targeting tidak akan berfungsi')
+        return
+    end
+    
+    -- Tambahkan target untuk Disnaker
+    exports['qb-target']:AddBoxZone("DisnakerId", vector3(Config.TargetLocation.x, Config.TargetLocation.y, Config.TargetLocation.z), 1.5, 1.5, {
+        name = "DisnakerId",
+        heading = Config.TargetLocation.w,
+        debugPoly = false,
+        minZ = Config.TargetLocation.z - 1.0,
+        maxZ = Config.TargetLocation.z + 1.0,
+    }, {
+        options = {
+            {
+                type = "client",
+                event = "disnaker:openMenu",
+                icon = "fas fa-chart-line",
+                label = "Lihat Harga Barang",
+            },
+        },
+        distance = 3.0
+    })
+    
+    print('[DISNAKER] Target QBCore berhasil diinisialisasi')
+end
+
+-- Fungsi untuk inisialisasi target ESX
+function InitializeESXTarget()
+    if not ESX then return end
+    
+    -- Periksa apakah ox_target tersedia
+    if GetResourceState('ox_target') == 'started' then
+        -- Tambahkan target untuk Disnaker menggunakan ox_target
+        exports.ox_target:addBoxZone({
+            coords = vector3(Config.TargetLocation.x, Config.TargetLocation.y, Config.TargetLocation.z),
+            size = vector3(1.5, 1.5, 2.0),
+            rotation = Config.TargetLocation.w,
+            debug = false,
+            options = {
+                {
+                    name = 'disnaker_open',
+                    icon = 'fas fa-chart-line',
+                    label = 'Lihat Harga Barang',
+                    onSelect = function()
+                        OpenPriceMenu()
+                    end
+                }
+            }
+        })
+        print('[DISNAKER] Target ESX (ox_target) berhasil diinisialisasi')
+    -- Periksa apakah qtarget tersedia
+    elseif GetResourceState('qtarget') == 'started' then
+        -- Tambahkan target untuk Disnaker menggunakan qtarget
+        exports.qtarget:AddBoxZone("DisnakerId", vector3(Config.TargetLocation.x, Config.TargetLocation.y, Config.TargetLocation.z), 1.5, 1.5, {
+            name = "DisnakerId",
+            heading = Config.TargetLocation.w,
+            debugPoly = false,
+            minZ = Config.TargetLocation.z - 1.0,
+            maxZ = Config.TargetLocation.z + 1.0,
+        }, {
+            options = {
+                {
+                    icon = "fas fa-chart-line",
+                    label = "Lihat Harga Barang",
+                    action = function()
+                        OpenPriceMenu()
+                    end
+                },
+            },
+            distance = 3.0
+        })
+        print('[DISNAKER] Target ESX (qtarget) berhasil diinisialisasi')
+    else
+        print('[DISNAKER] PERINGATAN: Tidak ada sistem target yang terdeteksi untuk ESX, targeting tidak akan berfungsi')
+    end
+end
 
 -- Ekspor fungsi untuk digunakan oleh script lain
 exports('GetCurrentItemPrice', GetCurrentItemPrice)

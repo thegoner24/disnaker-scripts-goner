@@ -223,6 +223,136 @@ RegisterCommand('forceupdateprices', function(source, args, rawCommand)
     end
 end, false)
 
+-- Command untuk mengatur harga pembelian pemerintah
+RegisterCommand('setgovprice', function(source, args, rawCommand)
+    local src = source
+    
+    -- Periksa izin admin
+    if IsPlayerAdmin(src) then
+        if #args < 2 then
+            TriggerClientEvent('chat:addMessage', src, {
+                color = {255, 0, 0},
+                multiline = true,
+                args = {"[DISNAKER]", "Penggunaan: /setgovprice [nama_barang] [harga_baru]"}
+            })
+            return
+        end
+        
+        local itemName = args[1]
+        local newPrice = tonumber(args[2])
+        
+        if not newPrice or newPrice <= 0 then
+            TriggerClientEvent('chat:addMessage', src, {
+                color = {255, 0, 0},
+                multiline = true,
+                args = {"[DISNAKER]", "Harga harus berupa angka positif"}
+            })
+            return
+        end
+        
+        local success, finalPrice = PriceAdjustment.SetGovernmentPrice(itemName, newPrice, false)
+        
+        if success then
+            TriggerClientEvent('chat:addMessage', src, {
+                color = {0, 255, 0},
+                multiline = true,
+                args = {"[DISNAKER]", "Harga pembelian pemerintah untuk " .. itemName .. " diatur menjadi $" .. FormatNumber(finalPrice)}
+            })
+            
+            -- Log ke console
+            print(string.format("[DISNAKER] Admin %s mengatur harga pembelian pemerintah untuk %s menjadi $%s", 
+                GetPlayerName(src), itemName, FormatNumber(finalPrice)))
+        else
+            TriggerClientEvent('chat:addMessage', src, {
+                color = {255, 0, 0},
+                multiline = true,
+                args = {"[DISNAKER]", "Barang tidak ditemukan: " .. itemName}
+            })
+        end
+    else
+        TriggerClientEvent('chat:addMessage', src, {
+            color = {255, 0, 0},
+            multiline = true,
+            args = {"[DISNAKER]", "Anda tidak memiliki izin untuk menggunakan perintah ini"}
+        })
+    end
+end, false)
+
+-- Command untuk mengatur subsidi pada barang
+RegisterCommand('setsubsidy', function(source, args, rawCommand)
+    local src = source
+    
+    -- Periksa izin admin
+    if IsPlayerAdmin(src) then
+        if #args < 2 then
+            TriggerClientEvent('chat:addMessage', src, {
+                color = {255, 0, 0},
+                multiline = true,
+                args = {"[DISNAKER]", "Penggunaan: /setsubsidy [nama_barang] [1/0]"}
+            })
+            return
+        end
+        
+        local itemName = args[1]
+        local subsidyStatus = tonumber(args[2])
+        
+        if subsidyStatus ~= 0 and subsidyStatus ~= 1 then
+            TriggerClientEvent('chat:addMessage', src, {
+                color = {255, 0, 0},
+                multiline = true,
+                args = {"[DISNAKER]", "Status subsidi harus 1 (aktif) atau 0 (tidak aktif)"}
+            })
+            return
+        end
+        
+        -- Temukan item dan harga pemerintah saat ini
+        local currentPrice = 0
+        for _, item in ipairs(Config.Items) do
+            if item.name == itemName then
+                currentPrice = item.governmentPrice
+                break
+            end
+        end
+        
+        if currentPrice == 0 then
+            TriggerClientEvent('chat:addMessage', src, {
+                color = {255, 0, 0},
+                multiline = true,
+                args = {"[DISNAKER]", "Barang tidak ditemukan: " .. itemName}
+            })
+            return
+        end
+        
+        local isSubsidized = subsidyStatus == 1
+        local success, finalPrice = PriceAdjustment.SetGovernmentPrice(itemName, currentPrice, isSubsidized)
+        
+        if success then
+            local statusText = isSubsidized and "diaktifkan" or "dinonaktifkan"
+            TriggerClientEvent('chat:addMessage', src, {
+                color = {0, 255, 0},
+                multiline = true,
+                args = {"[DISNAKER]", "Subsidi untuk " .. itemName .. " telah " .. statusText}
+            })
+            
+            -- Log ke console
+            print(string.format("[DISNAKER] Admin %s %s subsidi untuk %s", 
+                GetPlayerName(src), isSubsidized and "mengaktifkan" or "menonaktifkan", itemName))
+        else
+            TriggerClientEvent('chat:addMessage', src, {
+                color = {255, 0, 0},
+                multiline = true,
+                args = {"[DISNAKER]", "Gagal mengatur subsidi untuk: " .. itemName}
+            })
+        end
+    else
+        TriggerClientEvent('chat:addMessage', src, {
+            color = {255, 0, 0},
+            multiline = true,
+            args = {"[DISNAKER]", "Anda tidak memiliki izin untuk menggunakan perintah ini"}
+        })
+    end
+end, false)
+
 -- Fungsi untuk memeriksa apakah pemain adalah admin
 function IsPlayerAdmin(source)
     -- Implementasi sesuai dengan framework yang digunakan

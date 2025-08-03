@@ -317,6 +317,38 @@ body {
     color: var(--danger-color);
 }
 
+.government-info {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    font-size: 12px;
+    border-top: 1px dashed #ddd;
+    padding-top: 8px;
+}
+
+.gov-price {
+    color: var(--primary-color);
+    font-weight: 500;
+}
+
+.subsidy-status {
+    display: inline-block;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 11px;
+}
+
+.subsidy-active {
+    background-color: rgba(46, 204, 113, 0.2);
+    color: var(--success-color);
+}
+
+.subsidy-inactive {
+    background-color: rgba(231, 76, 60, 0.2);
+    color: var(--danger-color);
+}
+
 /* Style untuk item dalam tampilan list */
 .list-item {
     display: flex;

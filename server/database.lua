@@ -85,6 +85,31 @@ function UpdatePriceInDatabase(itemName, newPrice)
     return false
 end
 
+-- Fungsi untuk menyimpan harga pembelian pemerintah ke database
+function SaveGovernmentPrice(itemName, governmentPrice, isSubsidized)
+    -- Muat data saat ini
+    local currentPrices = SavedPrices
+    
+    -- Perbarui harga pemerintah untuk item
+    local updated = false
+    for i, item in ipairs(currentPrices) do
+        if item.name == itemName then
+            currentPrices[i].governmentPrice = governmentPrice
+            currentPrices[i].subsidized = isSubsidized
+            updated = true
+            break
+        end
+    end
+    
+    -- Jika item ditemukan dan diperbarui, simpan ke database
+    if updated then
+        SavePricesToDatabase(currentPrices)
+        return true
+    end
+    
+    return false
+end
+
 -- Fungsi untuk menyinkronkan harga dari config ke database
 function SyncPricesToDatabase()
     SavedPrices = Config.Items
@@ -101,6 +126,22 @@ function SyncPricesFromDatabase()
                 if dbItem.name == configItem.name then
                     Config.Items[j].currentPrice = dbItem.currentPrice
                     Config.Items[j].lastUpdate = dbItem.lastUpdate
+                    
+                    -- Sinkronkan data harga pemerintah jika ada
+                    if dbItem.governmentPrice ~= nil then
+                        Config.Items[j].governmentPrice = dbItem.governmentPrice
+                    else
+                        -- Jika tidak ada data harga pemerintah, gunakan harga dasar
+                        Config.Items[j].governmentPrice = dbItem.basePrice
+                    end
+                    
+                    -- Sinkronkan status subsidi jika ada
+                    if dbItem.subsidized ~= nil then
+                        Config.Items[j].subsidized = dbItem.subsidized
+                    else
+                        Config.Items[j].subsidized = false
+                    end
+                    
                     break
                 end
             end

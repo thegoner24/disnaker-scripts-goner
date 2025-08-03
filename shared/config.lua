@@ -11,6 +11,9 @@ Config.GovernmentControl = true -- Aktifkan kontrol harga oleh pemerintah
 Config.TaxRate = 5 -- Persentase pajak yang dikenakan pada transaksi (dalam %)
 Config.GovernmentBudget = 10000000 -- Anggaran pemerintah untuk subsidi harga
 
+-- Lokasi target untuk membuka UI Disnaker
+Config.TargetLocation = vector4(-551.53, -191.41, 38.22, 340.0) -- Lokasi default, ganti sesuai kebutuhan
+
 -- Daftar barang Disnaker dengan harga dasar
 Config.Items = {
     -- Kategori Makanan

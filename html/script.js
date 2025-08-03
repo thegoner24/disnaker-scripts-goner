@@ -166,6 +166,21 @@ function createGridItem(item) {
     const iconElement = clone.querySelector('.item-icon i');
     iconElement.className = getCategoryIcon(item.category);
     
+    // Tambahkan informasi harga pemerintah dan status subsidi
+    if (item.governmentPrice !== undefined) {
+        clone.querySelector('.gov-price').textContent = 'Harga Pemerintah: $' + formatNumber(item.governmentPrice);
+        
+        // Tampilkan status subsidi
+        const subsidyElement = clone.querySelector('.subsidy-status');
+        if (item.subsidized) {
+            subsidyElement.textContent = 'Status: Disubsidi';
+            subsidyElement.classList.add('subsidy-active');
+        } else {
+            subsidyElement.textContent = 'Status: Tidak Disubsidi';
+            subsidyElement.classList.add('subsidy-inactive');
+        }
+    }
+    
     return clone;
 }
 
@@ -189,6 +204,21 @@ function createListItem(item) {
     // Set ikon berdasarkan kategori
     const iconElement = clone.querySelector('.item-icon i');
     iconElement.className = getCategoryIcon(item.category);
+    
+    // Tambahkan informasi harga pemerintah dan status subsidi
+    if (item.governmentPrice !== undefined) {
+        clone.querySelector('.gov-price').textContent = 'Harga Pemerintah: $' + formatNumber(item.governmentPrice);
+        
+        // Tampilkan status subsidi
+        const subsidyElement = clone.querySelector('.subsidy-status');
+        if (item.subsidized) {
+            subsidyElement.textContent = 'Status: Disubsidi';
+            subsidyElement.classList.add('subsidy-active');
+        } else {
+            subsidyElement.textContent = 'Status: Tidak Disubsidi';
+            subsidyElement.classList.add('subsidy-inactive');
+        }
+    }
     
     return clone;
 }
