@@ -22,7 +22,9 @@ function LoadUI()
 end
 
 -- Inisialisasi UI saat resource dimulai
+-- Kita hanya memuat UI tanpa membukanya secara otomatis
 Citizen.CreateThread(function()
     Citizen.Wait(1000)
     LoadUI()
+    -- Tidak lagi membuka UI secara otomatis
 end)

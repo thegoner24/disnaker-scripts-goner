@@ -12,7 +12,7 @@ Config.TaxRate = 5 -- Persentase pajak yang dikenakan pada transaksi (dalam %)
 Config.GovernmentBudget = 10000000 -- Anggaran pemerintah untuk subsidi harga
 
 -- Lokasi target untuk membuka UI Disnaker
-Config.TargetLocation = vector4(-551.53, -191.41, 38.22, 340.0) -- Lokasi default, ganti sesuai kebutuhan
+Config.TargetLocation = vector4(-1289.84, -572.42, 30.57, 307.95) -- Lokasi penjualan Disnaker utama
 
 -- Daftar barang Disnaker dengan harga dasar
 Config.Items = {
@@ -36,26 +36,33 @@ Config.Items = {
     {name = "whale", label = "Paus", basePrice = 70000, category = "fishing", currentPrice = 70000, governmentPrice = 70000, lastUpdate = 0, subsidized = false},
     
     -- Kategori Pertanian
-    {name = "tomat", label = "Tomat", basePrice = 35000, category = "farming", currentPrice = 35000, governmentPrice = 35000, lastUpdate = 0, subsidized = false},
-    {name = "kentang", label = "Kentang", basePrice = 35000, category = "farming", currentPrice = 35000, governmentPrice = 35000, lastUpdate = 0, subsidized = false},
+    {name = "tomat", label = "Tomat", basePrice = 30000, category = "farming", currentPrice = 30000, governmentPrice = 30000, lastUpdate = 0, subsidized = false},
+    {name = "kentang", label = "Kentang", basePrice = 32500, category = "farming", currentPrice = 32500, governmentPrice = 32500, lastUpdate = 0, subsidized = false},
     {name = "wortel", label = "Wortel", basePrice = 35000, category = "farming", currentPrice = 35000, governmentPrice = 35000, lastUpdate = 0, subsidized = false},
-    {name = "jagung", label = "Jagung", basePrice = 35000, category = "farming", currentPrice = 35000, governmentPrice = 35000, lastUpdate = 0, subsidized = false},
+    {name = "jagung", label = "Jagung", basePrice = 37500, category = "farming", currentPrice = 37500, governmentPrice = 37500, lastUpdate = 0, subsidized = false},
     
     -- Kategori Kayu
-    {name = "packaged_plank", label = "Kayu Olahan", basePrice = 35000, category = "lumber", currentPrice = 35000, governmentPrice = 35000, lastUpdate = 0, subsidized = false},
+    {name = "packaged_plank", label = "Kayu Olahan", basePrice = 85000, category = "lumber", currentPrice = 85000, governmentPrice = 85000, lastUpdate = 0, subsidized = false},
     
     -- Kategori Bahan Kimia
-    {name = "essence", label = "Essence", basePrice = 35000, category = "chemical", currentPrice = 35000, governmentPrice = 35000, lastUpdate = 0, subsidized = false},
+    {name = "essence", label = "Essence", basePrice = 100000, category = "chemical", currentPrice = 100000, governmentPrice = 100000, lastUpdate = 0, subsidized = false},
     
     -- Kategori Tekstil
-    {name = "clothe", label = "Kain", basePrice = 35000, category = "textile", currentPrice = 35000, governmentPrice = 35000, lastUpdate = 0, subsidized = false},
-    {name = "leather", label = "Kulit", basePrice = 35000, category = "textile", currentPrice = 35000, governmentPrice = 35000, lastUpdate = 0, subsidized = false},
+    {name = "clothe", label = "Kain", basePrice = 90000, category = "textile", currentPrice = 90000, governmentPrice = 90000, lastUpdate = 0, subsidized = false},
+    {name = "leather", label = "Kulit", basePrice = 45000, category = "textile", currentPrice = 45000, governmentPrice = 45000, lastUpdate = 0, subsidized = false},
     
-    -- Kategori Daur Ulang
-    {name = "plastic", label = "Plastik", basePrice = 35000, category = "recycle", currentPrice = 35000, governmentPrice = 35000, lastUpdate = 0, subsidized = false},
-    {name = "metalscrap", label = "Potongan Logam", basePrice = 35000, category = "recycle", currentPrice = 35000, governmentPrice = 35000, lastUpdate = 0, subsidized = false},
-    {name = "alumunium", label = "Alumunium", basePrice = 35000, category = "recycle", currentPrice = 35000, governmentPrice = 35000, lastUpdate = 0, subsidized = false},
-    {name = "glass", label = "Kaca", basePrice = 35000, category = "recycle", currentPrice = 35000, governmentPrice = 35000, lastUpdate = 0, subsidized = false},
+    -- Kategori Sampah
+    {name = "plastic", label = "Plastik", basePrice = 45000, category = "trash", currentPrice = 45000, governmentPrice = 45000, lastUpdate = 0, subsidized = false},
+    {name = "metalscrap", label = "Potongan Logam", basePrice = 45000, category = "trash", currentPrice = 45000, governmentPrice = 45000, lastUpdate = 0, subsidized = false},
+    {name = "alumunium", label = "Alumunium", basePrice = 45000, category = "trash", currentPrice = 45000, governmentPrice = 45000, lastUpdate = 0, subsidized = false},
+    {name = "glass", label = "Kaca", basePrice = 45000, category = "trash", currentPrice = 45000, governmentPrice = 45000, lastUpdate = 0, subsidized = false},
+    
+    -- Kategori Barang Haram (Hanya untuk admin)
+    {name = "cocaine_bag", label = "Kokain", basePrice = 150000, category = "illegal", currentPrice = 150000, governmentPrice = 150000, lastUpdate = 0, subsidized = false},
+    {name = "heroin_bag", label = "Heroin", basePrice = 140000, category = "illegal", currentPrice = 140000, governmentPrice = 140000, lastUpdate = 0, subsidized = false},
+    {name = "weedbag", label = "Ganja", basePrice = 180000, category = "illegal", currentPrice = 180000, governmentPrice = 180000, lastUpdate = 0, subsidized = false},
+    
+    -- Kategori Daur Ulang sudah dipindahkan ke kategori Sampah
 }
 
 -- Kategori barang
