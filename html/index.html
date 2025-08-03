@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disnaker - Sistem Harga Barang</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div id="app" class="container">
+        <div class="header">
+            <div class="logo">
+                <i class="fas fa-chart-line"></i>
+                <h1>Disnaker</h1>
+            </div>
+            <div class="close-btn" id="closeBtn">
+                <i class="fas fa-times"></i>
+            </div>
+        </div>
+        
+        <div class="content">
+            <div class="sidebar">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="searchInput" placeholder="Cari barang...">
+                </div>
+                
+                <div class="categories">
+                    <h3>Kategori</h3>
+                    <ul id="categoryList">
+                        <!-- Kategori akan diisi oleh JavaScript -->
+                    </ul>
+                </div>
+                
+                <div class="info-box">
+                    <h3>Informasi</h3>
+                    <p>Harga barang diperbarui setiap <span id="updateInterval">3</span> jam.</p>
+                    <p>Perubahan harga: <span id="priceChangePercent">10</span>%</p>
+                    <div class="last-update">
+                        <p>Pembaruan terakhir:</p>
+                        <p id="lastUpdateTime">-</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="main-content">
+                <div class="filter-bar">
+                    <div class="filter">
+                        <label for="sortSelect">Urutkan:</label>
+                        <select id="sortSelect">
+                            <option value="name-asc">Nama (A-Z)</option>
+                            <option value="name-desc">Nama (Z-A)</option>
+                            <option value="price-asc">Harga (Rendah-Tinggi)</option>
+                            <option value="price-desc">Harga (Tinggi-Rendah)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="view-toggle">
+                        <button id="gridViewBtn" class="active"><i class="fas fa-th"></i></button>
+                        <button id="listViewBtn"><i class="fas fa-list"></i></button>
+                    </div>
+                </div>
+                
+                <div class="items-container grid-view" id="itemsContainer">
+                    <!-- Item akan diisi oleh JavaScript -->
+                </div>
+                
+                <div class="pagination" id="pagination">
+                    <!-- Pagination akan diisi oleh JavaScript -->
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>&copy; 2025 Disnaker. Semua hak dilindungi.</p>
+        </div>
+    </div>
+    
+    <!-- Template untuk item dalam tampilan grid -->
+    <template id="gridItemTemplate">
+        <div class="item">
+            <div class="item-icon">
+                <i class="fas fa-box"></i>
+            </div>
+            <div class="item-info">
+                <h3 class="item-name">Nama Barang</h3>
+                <div class="item-price">
+                    <span class="price-value">$0</span>
+                    <span class="price-change increase"><i class="fas fa-arrow-up"></i> 0%</span>
+                </div>
+            </div>
+        </div>
+    </template>
+    
+    <!-- Template untuk item dalam tampilan list -->
+    <template id="listItemTemplate">
+        <div class="item list-item">
+            <div class="item-icon">
+                <i class="fas fa-box"></i>
+            </div>
+            <div class="item-info">
+                <h3 class="item-name">Nama Barang</h3>
+                <p class="item-category">Kategori</p>
+            </div>
+            <div class="item-price">
+                <span class="price-value">$0</span>
+                <span class="price-change increase"><i class="fas fa-arrow-up"></i> 0%</span>
+            </div>
+        </div>
+    </template>
+    
+    <script src="script.js"></script>
+</body>
+</html>

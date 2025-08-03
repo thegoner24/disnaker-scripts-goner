@@ -1,0 +1,398 @@
+/* Style untuk Disnaker - Sistem Harga Barang */
+:root {
+    --primary-color: #2c3e50;
+    --secondary-color: #3498db;
+    --accent-color: #e74c3c;
+    --background-color: #ecf0f1;
+    --card-color: #ffffff;
+    --text-color: #2c3e50;
+    --text-light: #7f8c8d;
+    --success-color: #2ecc71;
+    --warning-color: #f39c12;
+    --danger-color: #e74c3c;
+    --border-radius: 8px;
+    --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+.container {
+    width: 80%;
+    max-width: 1200px;
+    background-color: var(--background-color);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--box-shadow);
+    display: flex;
+    flex-direction: column;
+    max-height: 80vh;
+}
+
+.header {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo i {
+    font-size: 24px;
+    color: var(--secondary-color);
+}
+
+.logo h1 {
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.close-btn {
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    transition: var(--transition);
+}
+
+.close-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.close-btn i {
+    font-size: 20px;
+}
+
+.content {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+}
+
+.sidebar {
+    width: 250px;
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-right: 1px solid #ddd;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    overflow-y: auto;
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    border-radius: var(--border-radius);
+    padding: 8px 12px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.search-box i {
+    color: var(--text-light);
+    margin-right: 8px;
+}
+
+.search-box input {
+    border: none;
+    outline: none;
+    width: 100%;
+    font-size: 14px;
+}
+
+.categories h3, .info-box h3 {
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: var(--primary-color);
+}
+
+.categories ul {
+    list-style: none;
+}
+
+.categories li {
+    padding: 8px 10px;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: var(--transition);
+    margin-bottom: 5px;
+}
+
+.categories li:hover {
+    background-color: rgba(52, 152, 219, 0.1);
+}
+
+.categories li.active {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+.info-box {
+    background-color: white;
+    border-radius: var(--border-radius);
+    padding: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.info-box p {
+    font-size: 14px;
+    margin-bottom: 8px;
+    color: var(--text-color);
+}
+
+.info-box span {
+    font-weight: 500;
+    color: var(--secondary-color);
+}
+
+.last-update {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #eee;
+}
+
+.main-content {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.filter-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    padding: 10px 15px;
+    border-radius: var(--border-radius);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.filter {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.filter label {
+    font-size: 14px;
+    color: var(--text-color);
+}
+
+.filter select {
+    padding: 6px 10px;
+    border-radius: var(--border-radius);
+    border: 1px solid #ddd;
+    outline: none;
+    font-size: 14px;
+    background-color: white;
+}
+
+.view-toggle {
+    display: flex;
+    gap: 5px;
+}
+
+.view-toggle button {
+    width: 36px;
+    height: 36px;
+    border-radius: var(--border-radius);
+    border: 1px solid #ddd;
+    background-color: white;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: var(--transition);
+}
+
+.view-toggle button.active {
+    background-color: var(--secondary-color);
+    color: white;
+    border-color: var(--secondary-color);
+}
+
+.items-container {
+    display: grid;
+    gap: 15px;
+}
+
+.items-container.grid-view {
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+}
+
+.items-container.list-view {
+    grid-template-columns: 1fr;
+}
+
+.item {
+    background-color: white;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: var(--transition);
+    cursor: pointer;
+}
+
+.item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.item-icon {
+    background-color: var(--primary-color);
+    color: white;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+}
+
+.item-info {
+    padding: 15px;
+}
+
+.item-name {
+    font-size: 16px;
+    margin-bottom: 8px;
+    color: var(--text-color);
+}
+
+.item-price {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.price-value {
+    font-weight: 600;
+    font-size: 18px;
+    color: var(--primary-color);
+}
+
+.price-change {
+    font-size: 12px;
+    padding: 3px 6px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    gap: 3px;
+}
+
+.price-change.increase {
+    background-color: rgba(46, 204, 113, 0.2);
+    color: var(--success-color);
+}
+
+.price-change.decrease {
+    background-color: rgba(231, 76, 60, 0.2);
+    color: var(--danger-color);
+}
+
+/* Style untuk item dalam tampilan list */
+.list-item {
+    display: flex;
+    align-items: center;
+    padding-right: 15px;
+}
+
+.list-item .item-icon {
+    width: 60px;
+    height: 60px;
+    flex-shrink: 0;
+}
+
+.list-item .item-info {
+    flex: 1;
+}
+
+.list-item .item-category {
+    font-size: 12px;
+    color: var(--text-light);
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    margin-top: auto;
+    padding-top: 15px;
+}
+
+.pagination button {
+    width: 36px;
+    height: 36px;
+    border-radius: var(--border-radius);
+    border: 1px solid #ddd;
+    background-color: white;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: var(--transition);
+}
+
+.pagination button.active {
+    background-color: var(--secondary-color);
+    color: white;
+    border-color: var(--secondary-color);
+}
+
+.footer {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    font-size: 12px;
+}
+
+/* Responsif */
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+        max-height: 90vh;
+    }
+    
+    .content {
+        flex-direction: column;
+    }
+    
+    .sidebar {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid #ddd;
+        max-height: 300px;
+    }
+    
+    .items-container.grid-view {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+}
